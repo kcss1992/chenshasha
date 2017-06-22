@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="vue.js"></script>
+    <style>
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .5s
+        }
+        .fade-enter, .fade-leave-active {
+            opacity: 0
+        }
+
+    </style>
+</head>
+<body>
+<div id="d1">{{message}}</div>
+<div id="app-2">
+  <span v-bind:title="message">
+    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+  </span>
+</div>
+<div id="app-3">
+    <p v-if="seen">现在你看到我了</p>
+</div>
+<div id="demo">
+    <button v-on:click="show=!show">toggle</button>
+    <transition name="fade">
+        <p v-if="show">hello</p>
+    </transition>
+</div>
+<script>
+    var data={message:'hello world'};
+   var vm= new Vue({
+        el:'#d1',
+        data:data,
+       created: function () {
+           // `this` 指向 vm 实例
+           console.log('message is: ' + this.message)
+       }
+
+   });
+   data.message='change txt';
+    console.log(vm.message);
+   vm.$watch('message',function(newVal,oldVal){
+       console.log(newVal);
+       console.log(oldVal);
+   });
+    var app2 = new Vue({
+        el: '#app-2',
+        data: {
+            message: '页面加载于 ' + new Date()
+        }
+    })
+    var app3 = new Vue({
+        el: '#app-3',
+        data: {
+            seen: false
+        }
+    })
+    new Vue({
+        el:'#demo',
+        data:{
+            show:true
+        }
+    })
+</script>
+</body>
+</html>
