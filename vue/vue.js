@@ -20,7 +20,6 @@ function isUndef (v) {
 function isDef (v) {
   return v !== undefined && v !== null
 }
-
 function isTrue (v) {
   return v === true
 }
