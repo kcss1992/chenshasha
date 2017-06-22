@@ -20,7 +20,7 @@ window.LArea = (function() {
         this.data;
         this.index = 0;
         this.value = [0, 0, 0];
-    }
+    };
     MobileArea.prototype = {
         init: function(params) {
             this.params = params;
@@ -48,22 +48,22 @@ window.LArea = (function() {
             } else {
                 var xhr = new XMLHttpRequest();
                 xhr.open('get', _self.params.data);
-                xhr.onload = function(e) {
+                xhr.onload = function() {
                     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 0) {
                         var responseData = JSON.parse(xhr.responseText);
                         _self.data = responseData.data;
                         if (callback) {
                             callback()
-                        };
+                        }
                     }
-                }
+                };
                 xhr.send();
             }
         },
         bindEvent: function() {
             var _self = this;
             //呼出插件
-            function popupArea(e) {
+            function popupArea() {
                 _self.gearArea = document.createElement("div");
                 _self.gearArea.className = "gearArea";
                 _self.gearArea.innerHTML = '<div class="area_ctrl slideInUp">' +
@@ -170,7 +170,7 @@ window.LArea = (function() {
                 target.setAttribute('top', target["pos_" + target.id] + 'em');
                 if(e.targetTouches[0].screenY<1){
                     gearTouchEnd(e);
-                };
+                }
             }
             //离开屏幕
             function gearTouchEnd(e) {
@@ -258,7 +258,7 @@ window.LArea = (function() {
                                     childData = nextData[i];
                                     break;
                                  }
-                             };
+                             }
                         _self.index=2;
                         _self.setGearTooth(childData);
                              break;
@@ -287,16 +287,16 @@ window.LArea = (function() {
                 var childData;
                 switch (_self.type) {
                     case 1:
-                    childData = item[gearVal].child
+                    childData = item[gearVal].child;
                         break;
                     case 2:
-                     var nextData= _self.data[_self.index+1] 
+                     var nextData= _self.data[_self.index+1] ;
                      for (var i in nextData) {
                          if(i==id){
                             childData = nextData[i];
                             break;
                          }
-                     };
+                     }
                         break;
                 }
                 var itemStr = "";
@@ -352,6 +352,6 @@ window.LArea = (function() {
             document.body.removeChild(_self.gearArea);
             _self.gearArea=null;
         }
-    }
+    };
     return MobileArea;
-})()
+})();
